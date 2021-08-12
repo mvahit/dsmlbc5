@@ -22,6 +22,7 @@ def check_df(dataframe, head=5):
 
 
 def cat_summary(dataframe, col_name, plot=False):
+    """Gocuk.com"""
     print(pd.DataFrame({col_name: dataframe[col_name].value_counts(),
                         "Ratio": 100 * dataframe[col_name].value_counts() / len(dataframe)}))
     print("##########################################")
