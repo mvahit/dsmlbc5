@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: dsmlbc5
+Version: 0.0.2
+Summary: Data Science Tools
+Home-page: https://github.com/mvahit/dsmlbc5
+Author: Vahit Keskin
+Author-email: UNKNOWN
+License: MIT
+Description: UNKNOWN
+Keywords: data science,machine learning,bootcamp
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Scientific/Engineering
