@@ -109,6 +109,64 @@ def target_summary_with_cat(dataframe, target, categorical_col):
     print(pd.DataFrame({"TARGET_MEAN": dataframe.groupby(categorical_col)[target].mean()}), end="\n\n\n")
 
 
+def target_summary_with_cat_extended(dataframe, target, categorical_col):
+    """
+
+        Veri setindeki Target colonunu, girilen kategorik colona gore gruplayip
+            - mean
+            - count
+            - ratio
+        sonuclarini ekrana yazdirir.
+
+        Parameters
+        ------
+            dataframe: dataframe
+                    Target ve Kategorik kolonlarin bulundugu dataframe
+            target: str
+                    Sonucun getirilecegi hedef degisken
+            categorical_col: str
+                    Gruplanmak istenen kategorik kolon
+
+        Returns
+        ------
+            None
+
+        Examples
+        ------
+            import pandas as pd
+            in:
+            df = pd.DataFrame({'Animal': ['Falcon', 'Falcon', 'Falcon',
+                                          'Parrot', 'Parrot'],
+                               'Max Speed': [310, 330, 340, 24, 28]})
+
+            in:
+            df
+            out:
+              Animal   Max Speed
+            0  Falcon  310
+            1  Falcon  330
+            2  Falcon  340
+            3  Parrot   24
+            4  Parrot   28
+
+            in: target_summary_with_cat_extended(df, 'Max Speed', 'Animal')
+            out:
+                    TARGET_MEAN  TARGET_CCOUNT  RATIO
+            Animal
+            Falcon 326.6667      3             60.0000
+            Parrot  26.0000      2             40.0000
+
+        Notes
+        ------
+            None
+
+        """
+
+    print(pd.DataFrame({"TARGET_MEAN": dataframe.groupby(categorical_col)[target].mean(),
+                        "TARGET_CCOUNT": dataframe.groupby(categorical_col)[target].count(),
+                        "RATIO": 100 * dataframe[categorical_col].value_counts() / len(dataframe)}), end="\n\n\n")
+
+
 def target_summary_with_num(dataframe, target, numerical_col):
     print(dataframe.groupby(target).agg({numerical_col: "mean"}), end="\n\n\n")
 
