@@ -184,3 +184,27 @@ def high_correlated_cols(dataframe, plot=False, corr_th=0.90):
         sns.heatmap(corr, cmap="RdBu")
         plt.show()
     return drop_list
+
+def missing_values_table(dataframe, na_name=False):
+    na_columns = [col for col in dataframe.columns if dataframe[col].isnull().sum() > 0]
+    n_miss = dataframe[na_columns].isnull().sum().sort_values(ascending=False)
+    ratio = (dataframe[na_columns].isnull().sum() / dataframe.shape[0] * 100).sort_values(ascending=False)
+    missing_df = pd.concat([n_miss, np.round(ratio, 2)], axis=1, keys=['n_miss', 'ratio'])
+    print(missing_df, end="\n")
+
+    if na_name:
+        return na_columns
+
+
+
+def missing_vs_target(dataframe, target, na_columns):
+    temp_df = dataframe.copy()
+
+    for col in na_columns:
+        temp_df[col + '_NA_FLAG'] = np.where(temp_df[col].isnull(), 1, 0)
+
+    na_flags = temp_df.loc[:, temp_df.columns.str.contains("_NA_")].columns
+
+    for col in na_flags:
+        print(pd.DataFrame({"TARGET_MEAN": temp_df.groupby(col)[target].mean(),
+                            "Count": temp_df.groupby(col)[target].count()}), end="\n\n\n")
