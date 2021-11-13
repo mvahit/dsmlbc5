@@ -184,3 +184,18 @@ def high_correlated_cols(dataframe, plot=False, corr_th=0.90):
         sns.heatmap(corr, cmap="RdBu")
         plt.show()
     return drop_list
+
+
+
+# plots the importance of features for ML model
+def plot_importance(model, features, num=10, save=False):
+    feature_imp = pd.DataFrame({'Value': model.feature_importances_, 'Feature': features.columns})
+    plt.figure(figsize=(10, 10))
+    sns.set(font_scale=1)
+    sns.barplot(x="Value", y="Feature", data=feature_imp.sort_values(by="Value",
+                                                                     ascending=False)[0:num])
+    plt.title('Features')
+    plt.tight_layout()
+    if save:
+        plt.savefig('importances.png')
+    plt.show()
