@@ -184,3 +184,9 @@ def high_correlated_cols(dataframe, plot=False, corr_th=0.90):
         sns.heatmap(corr, cmap="RdBu")
         plt.show()
     return drop_list
+
+
+def col_cross_row(dataframe):
+    column_count = len(dataframe.columns)
+    row_count = len(dataframe)
+    return column_count * row_count
