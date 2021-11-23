@@ -184,3 +184,21 @@ def high_correlated_cols(dataframe, plot=False, corr_th=0.90):
         sns.heatmap(corr, cmap="RdBu")
         plt.show()
     return drop_list
+
+
+def plot_numerical_col(dataframe, numerical_col):
+    dataframe[numerical_col].hist(bins=20)
+    plt.xlabel(numerical_col)
+    plt.show()
+
+
+def count_separated_words(dataframe, cat_col, new_col_name, sep=','):
+    """
+
+    :param dataframe: dataframe
+    :param cat_col: categorical column
+    :param new_col_name: new column name that will added to current dataframe
+    :param sep: the string separator that separates the texts in related columns
+    :return: None
+    """
+    dataframe[new_col_name] = [len(words) if words is not np.NAN else 0 for words in df[cat_col].str.split(sep)]
